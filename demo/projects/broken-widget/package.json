@@ -1,0 +1,10 @@
+{
+  "name": "broken-widget",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo project with a deliberately failing unit test",
+  "scripts": {
+    "test:unit": "node test/unit.js",
+    "test:lint": "node test/lint.js"
+  }
+}

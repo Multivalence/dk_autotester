@@ -1,0 +1,10 @@
+{
+  "name": "string-utils",
+  "version": "1.0.0",
+  "private": true,
+  "description": "String helpers (passing demo project)",
+  "scripts": {
+    "test:unit": "node test/unit.js",
+    "test:lint": "node test/lint.js"
+  }
+}

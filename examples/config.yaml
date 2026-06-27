@@ -1,0 +1,35 @@
+# dk_autotester manifest (input convention).
+#
+# Every source MUST declare a `name` and `description`. Each source is EITHER:
+#   - a git repo:     set `url` (and optional `ref`)  -> cloned with the SSH key
+#   - a local folder: set `path`                      -> copied in, no SSH needed
+#
+# `ssh_secret` is only required if at least one source is a git repo.
+
+language: node                     # node | python
+ssh_secret: ./secrets/id_ed25519   # used ONLY in the clone stage; omit if no git sources
+test_script: ./harness/run_tests.sh
+
+timeout_seconds: 600               # per-source harness timeout
+batch_size: 25                     # sources processed per container (hybrid isolation)
+sandbox: none                      # none | nsjail (nsjail reserved for later)
+network: none                      # none | bridge   (container network for the run stage)
+
+# Optional resource caps applied to every batch container.
+resources:
+  memory: 2g
+  cpus: "2"
+  pids_limit: 512
+
+# `sources` is the preferred key; `repos` is still accepted for backward compat.
+sources:
+  # A git repository (cloned via the SSH secret in the build's clone stage).
+  - name: widget-api
+    description: "Order widget REST service - validates checkout flow"
+    url: git@github.com:example-org/widget-api.git
+    ref: main                      # optional; defaults to the remote HEAD
+
+  # A local folder of tests (copied in directly; no clone, no SSH key).
+  - name: sample-local
+    description: "Local sample test folder shipped with this repo"
+    path: ./sample_tests

@@ -1,0 +1,28 @@
+# Demo manifest: three LOCAL folders, no git and no SSH key required.
+# Paths are resolved relative to this file (the demo/ directory).
+
+language: node
+test_script: ./run_tests.sh        # the bash file run once per folder
+
+timeout_seconds: 120
+batch_size: 2                      # 3 folders -> 2 batches, to show batching
+sandbox: nsjail
+network: none
+
+resources:
+  memory: 1g
+  cpus: "1"
+  pids_limit: 256
+
+sources:
+  - name: calculator
+    description: "Arithmetic helpers - expected to pass"
+    path: ./projects/calculator
+
+  - name: string-utils
+    description: "String helpers - expected to pass"
+    path: ./projects/string-utils
+
+  - name: broken-widget
+    description: "Widget renderer with a known bug - unit test fails"
+    path: ./projects/broken-widget

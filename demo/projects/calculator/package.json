@@ -1,0 +1,10 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tiny arithmetic library (passing demo project)",
+  "scripts": {
+    "test:unit": "node test/unit.js",
+    "test:lint": "node test/lint.js"
+  }
+}
